@@ -2,7 +2,13 @@ class Player:
 	def __init__(self, username_, passwd_):
 		self.username = username_
 		self.password = passwd_
+	
+	def __repr__(self):
+		conas = f"Player: Username -> {self.username} | Pass -> {self.password}"
 
+		return conas 
+
+players = []
 
 def separate():
 	print('-------------------------------------')
@@ -35,9 +41,6 @@ def register():
 
 	p1 = Player(usern, passwd)
 	players.append(p1)
-
-
-
 
 
 def login():

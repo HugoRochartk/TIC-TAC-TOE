@@ -18,6 +18,6 @@ def main():
 	map_ = create_empty_map()
 	pprint(map_)
 	aut.menu_login()
-
+	print(aut.players)
 
 main()
