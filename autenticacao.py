@@ -10,6 +10,7 @@ def menu_login():
 
 	while True:
 		separate()
+		print('\n\n')
 		print("1 - Registar uma conta")
 		print("2 - Login")
 		print("3 - Fechar conta")
@@ -28,5 +29,7 @@ def menu_login():
 			sv.close()
 		else:
 			sv.stop()
+			sv.take_info_into_dic()
 			break
+
 
