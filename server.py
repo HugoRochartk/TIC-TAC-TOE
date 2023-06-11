@@ -1,5 +1,5 @@
 import csv
-import autenticacao as aut
+
 
 '''class Player:
 	def __init__(self, username_, passwd_):
@@ -10,6 +10,9 @@ import autenticacao as aut
 		toString = f"Player: Username -> {self.username} | Pass -> {self.password}"
 		return toString 
 '''
+
+logged_in = {}
+
 
 def take_info_into_dic():
 	res = {}
@@ -59,18 +62,38 @@ def register():
 
 
 def login():
-	pass
+	cache_info = take_info_into_dic()
+	usern = input('Username: ')
+	if usern not in cache_info:
+		print("\nNão é possível iniciar sessão. O username não existe.")
+		return (0, -1)
+	else:
+		passwd = input('Password: ')
+		if passwd != cache_info[usern]:
+			print("\nNão é possível iniciar sessão. A senha está incorreta.")
+			return (0, -1)
+		else:
+			if usern in logged_in:
+				print("\nO utilizador já se encontra online.")
+				return (0, -1)
+			else:
+				logged_in[usern] = True
+				print("\nLog-in efetuado com sucesso.")
+				return (1, usern)
+	
+
+
 
 def close():
 	pass
 
 
-
-data = []
 stop = False
+
 
 def stop():
 	stop = True
+
 
 def start():
 
