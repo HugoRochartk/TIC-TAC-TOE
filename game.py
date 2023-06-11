@@ -8,5 +8,5 @@ def create_empty_map():
 	return map_
 	
 
-def start_game(players):
-	print(f"começar entre {players[0]} e {players[1]}. são {len(players)} jogadores.")
+def start_game(player1, player2):
+	print(f"\ncomeçar entre {player1} e {player2}.")
