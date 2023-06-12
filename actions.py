@@ -131,21 +131,6 @@ def close():
 
 
 
-	
-
-
-stop = False
-
-
-def stop():
-	stop = True
-
-
-def start():
-
-	while not stop:
-		pass
-
 		
 
 

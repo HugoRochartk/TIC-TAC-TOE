@@ -1,4 +1,4 @@
-import server as sv
+import actions as act
 from game import start_game
 
 
@@ -8,7 +8,6 @@ def separate():
 
 
 def menu_login():
-	sv.start()
 
 	while True:
 		separate()
@@ -23,19 +22,17 @@ def menu_login():
 		opt = int(input('Opção: '))
 		if opt == 1:
 			separate()
-			sv.register()
+			act.register()
 		elif opt == 2:
 			separate()
-			sv.login()
+			act.login()
 		elif opt == 3:
 			separate()
-			sv.close()
+			act.close()
 		elif opt == 4:
 			separate()
-			sv.start_game()
+			act.start_game()
 		else:
-			sv.stop()
-			sv.take_info_into_dic()
 			break
 
 
