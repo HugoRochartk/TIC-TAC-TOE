@@ -74,26 +74,56 @@ def game(FstPlayerInfo, SndPlayerInfo):
 	Map = create_empty_map()
 	while ((not draw) and (not victory)):
 		count+=1
+		sleep(1)
+		separate()
+		print('\n')
 		print_map(Map)
 		if last_player == snd_player:
-			print(f"É a vez de {fst_player}, escolha a linha e a coluna onde deseja jogar:")
+			print(f"\nÉ a vez de {fst_player}, escolha a linha e a coluna onde deseja jogar:")
 			symbol = fstplayer_symbol
 			last_player = fst_player
 		else:
-			print(f"É a vez de {snd_player}, escolha a linha e a coluna onde deseja jogar:")
+			print(f"\nÉ a vez de {snd_player}, escolha a linha e a coluna onde deseja jogar:")
 			symbol = sndplayer_symbol
 			last_player = snd_player
 		row = int(input("Linha: "))
-		column = int(input("Coluna: "))
-		Map[row-1][column-1] = symbol
-		if count >= 3:
-			victory = check_victory(Map, symbol)
-		if count == 9:
-			draw = check_draw(Map, fstplayer_symbol, sndplayer_symbol)
+		if row < 1 or row > 3:
+			print('\nNúmero de linha inválido, o número deve ser entre 1 e 3 (inclusive). Escolha outro.')
+			if last_player == fst_player:
+				last_player = snd_player
+			else:
+				last_player = fst_player
+		else:
+			column = int(input("Coluna: "))
+			if column < 1 or column > 3:
+				print('\nNúmero de coluna inválido, o número deve ser entre 1 e 3 (inclusive). Escolha outro.')
+				if last_player == fst_player:
+					last_player = snd_player
+				else:
+					last_player = fst_player
+			else:
+				if Map[row-1][column-1] != ' ':
+					print('\nA posição já se encontra preenchida, coloque outra.')
+					if last_player == fst_player:
+						last_player = snd_player
+					else:
+						last_player = fst_player
+				else:
+					Map[row-1][column-1] = symbol
+					if count >= 3:
+						victory = check_victory(Map, symbol)
+					if count == 9:
+						draw = check_draw(Map, fstplayer_symbol, sndplayer_symbol)
 	if draw:
+		sleep(1)
+		separate()
+		print('\n')
 		print_map(Map)
 		print("Empate!!")
 	else:
+		sleep(1)
+		separate()
+		print('\n')
 		print_map(Map)
 		if symbol == FstPlayerInfo[1]:
 			print(f"Parabéns {fst_player}, venceste!")
