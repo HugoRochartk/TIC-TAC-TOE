@@ -1,6 +1,4 @@
 import actions as act
-from game import start_game
-
 
 
 def separate():

@@ -23,9 +23,85 @@ def print_map(map):
 	
 
 
+def is_full(Map):
+	for row in Map:
+		for symbol in row:
+			if symbol != ' ':
+				pass
+			else:
+				return False
+	return True
+
+
+def check_victory(Map, symbol):
+	if Map[0][0] == Map[0][1] == Map[0][2] == symbol:
+		return True
+	elif Map[1][0] == Map[1][1] == Map[1][2] == symbol:
+		return True
+	elif Map[2][0] == Map[2][1] == Map[2][2] == symbol:
+		return True
+	elif Map[0][0] == Map[1][0] == Map[2][0] == symbol:
+		return True
+	elif Map[0][1] == Map[1][1] == Map[2][1] == symbol:
+		return True
+	elif Map[0][2] == Map[1][2] == Map[2][2] == symbol:
+		return True
+	elif Map[0][0] == Map[1][1] == Map[2][2] == symbol:
+		return True
+	elif Map[0][2] == Map[1][1] == Map[2][0] == symbol:
+		return True
+	else:
+		return False
+
+
+
+def check_draw(Map, Symbol1, Symbol2):
+	if is_full(Map) and check_victory(Map, Symbol1) == check_victory(Map, Symbol2) == False:
+		return True
+	else:
+		return False
+
 	
 
-def start_game(player1, player2):
+
+def game(FstPlayerInfo, SndPlayerInfo):
+	count = 0
+	draw = False
+	victory = False
+	fst_player, fstplayer_symbol = FstPlayerInfo
+	snd_player, sndplayer_symbol = SndPlayerInfo
+	last_player = snd_player
+	Map = create_empty_map()
+	while ((not draw) and (not victory)):
+		count+=1
+		print_map(Map)
+		if last_player == snd_player:
+			print(f"É a vez de {fst_player}, escolha a linha e a coluna onde deseja jogar:")
+			symbol = fstplayer_symbol
+			last_player = fst_player
+		else:
+			print(f"É a vez de {snd_player}, escolha a linha e a coluna onde deseja jogar:")
+			symbol = sndplayer_symbol
+			last_player = snd_player
+		row = int(input("Linha: "))
+		column = int(input("Coluna: "))
+		Map[row-1][column-1] = symbol
+		if count >= 3:
+			victory = check_victory(Map, symbol)
+		if count == 9:
+			draw = check_draw(Map, fstplayer_symbol, sndplayer_symbol)
+	if draw:
+		print_map(Map)
+		print("Empate!!")
+	else:
+		print_map(Map)
+		if symbol == FstPlayerInfo[1]:
+			print(f"Parabéns {fst_player}, venceste!")
+		elif symbol == SndPlayerInfo[1]:
+			print(f'Parabéns {snd_player}, venceste!')
+
+
+def setup_game(player1, player2):
 	print(f'\nIniciando o jogo entre {player1} e {player2}...')
 	sleep(2)
 	print(f'\nGerando aleatoriamente o primeiro a jogar...')
@@ -43,13 +119,10 @@ def start_game(player1, player2):
 		sndplayer_symbol = 'X'
 	sleep(2)
 	print(f'O símbolo \'{fstplayer_symbol}\' está associado a {fst_player}.')
-	print(f'O símbolo \'{sndplayer_symbol}\' está associado a {snd_player}.')
-       
-	map_ = create_empty_map()
-	sleep(2)
-	print('\n')
-	separate()
-	print_map(map_)
+	print(f'O símbolo \'{sndplayer_symbol}\' está associado a {snd_player}.\n')
+	game((fst_player, fstplayer_symbol), (snd_player, sndplayer_symbol))
+
+
 
 
 

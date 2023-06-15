@@ -114,7 +114,7 @@ def start_game():
 					if usern2 not in logged_in:
 						print("\nO jogador 2 não se encontra online.")
 					else:
-						game.start_game(usern1, usern2)
+						game.setup_game(usern1, usern2)
 
 					
 
