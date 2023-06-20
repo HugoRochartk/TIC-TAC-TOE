@@ -5,6 +5,11 @@ def separate():
 	print('-------------------------------------')
 
 
+def clear_input(input):
+	res = input.replace(' ', "")
+	res = res.replace('\t', "")
+	return res
+
 def menu_login():
 
 	while True:
@@ -17,17 +22,18 @@ def menu_login():
 		print("5 - Sair")
 		print('\n\n')
 
-		opt = int(input('Opção: '))
-		if opt == 1:
+		opt = input('Opção: ')
+		opt = clear_input(opt)
+		if opt == "1":
 			separate()
 			act.register()
-		elif opt == 2:
+		elif opt == "2":
 			separate()
 			act.login()
-		elif opt == 3:
+		elif opt == "3":
 			separate()
 			act.close()
-		elif opt == 4:
+		elif opt == "4":
 			separate()
 			act.start_game()
 		else:

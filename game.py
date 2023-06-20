@@ -1,6 +1,6 @@
 from random import choice
 from time import sleep
-
+import actions
 
 def separate():
 	print('-------------------------------------')
@@ -120,6 +120,7 @@ def game(FstPlayerInfo, SndPlayerInfo):
 		print('\n')
 		print_map(Map)
 		print("Empate!!")
+		actions.update_draw(fst_player, snd_player)
 	else:
 		sleep(1)
 		separate()
@@ -127,8 +128,10 @@ def game(FstPlayerInfo, SndPlayerInfo):
 		print_map(Map)
 		if symbol == FstPlayerInfo[1]:
 			print(f"Parabéns {fst_player}, venceste!")
+			actions.update_victory(fst_player, snd_player)
 		elif symbol == SndPlayerInfo[1]:
 			print(f'Parabéns {snd_player}, venceste!')
+			actions.update_victory(snd_player, fst_player)
 
 
 def setup_game(player1, player2):
