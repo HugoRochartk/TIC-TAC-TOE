@@ -1,4 +1,4 @@
-import actions as act
+import menu_actions as act
 
 
 def separate():
