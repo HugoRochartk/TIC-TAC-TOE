@@ -1,4 +1,5 @@
 import menu_actions as act
+import csv
 
 
 def create_line(line_splitted):
@@ -9,7 +10,7 @@ def create_line(line_splitted):
 	return res
 
 
-def update_draw(User1, User2):
+def update_draw_counter(User1, User2):
 	lines = act.readlines()
 	new_lines = []
 	
@@ -25,7 +26,7 @@ def update_draw(User1, User2):
 	act.overwrite(new_lines)
 	
 	
-def update_victory(winner, loser):
+def update_victory_counter(winner, loser):
 	lines = act.readlines()
 	new_lines = []
 	
@@ -45,3 +46,30 @@ def update_victory(winner, loser):
 			new_lines.append(line)
 		count+=1
 	act.overwrite(new_lines)
+
+
+def update_mh_draw(fst, snd):
+	pass
+
+def update_mh_victory(winner, loser):
+	pass
+
+
+
+def get_level(Username):
+	with open("data/cache.csv", "r") as f:
+		info = csv.reader(f, delimiter=",")
+		count = 0
+		for row in info:
+			if count and row[0] == Username:
+				return int(row[2])
+		f.close()
+	
+
+
+def update_level(winner, loser):
+	pass
+	
+
+def update_level_draw(fst, snd):
+	pass

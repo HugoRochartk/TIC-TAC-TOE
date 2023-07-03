@@ -59,7 +59,7 @@ def readlines():
 	with open("data/cache.csv", "r") as f:
 		lines = f.readlines()
 		if lines == []:
-			lines = ['username,password,level,V,E,D\n']
+			lines = ['username,password,level,V,E,D,MatchHistory\n']
 		f.close()
 	return lines
 
@@ -74,7 +74,7 @@ def register():
 		overwrite(lines)
 	else:
 		passwd = input('Password: ')
-		buffer = f"{usern},{passwd},1,0,0,0\n"
+		buffer = f"{usern},{passwd},1,0,0,0,[]\n"
 		overwrite(lines, buffer)
 		print("\nConta criada com sucesso.")
 	
