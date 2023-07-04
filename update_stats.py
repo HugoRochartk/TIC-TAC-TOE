@@ -53,17 +53,6 @@ def update_mh_draw(fst, snd):
 
 def update_mh_victory(winner, loser):
 	pass
-
-
-
-def get_level(Username):
-	with open("data/cache.csv", "r") as f:
-		info = csv.reader(f, delimiter=",")
-		count = 0
-		for row in info:
-			if count and row[0] == Username:
-				return int(row[2])
-		f.close()
 	
 
 

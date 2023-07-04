@@ -25,6 +25,7 @@ def overwrite(lines, buf=""):
 
 
 def remove_from_csv(user):
+	
 	count = 0
 	with open("data/cache.csv", "r") as f:
 		lines = f.readlines()
@@ -37,6 +38,7 @@ def remove_from_csv(user):
 				if user_to_compare == user:
 					lines[count] = ""
 			count+=1
+		f.close()
 	overwrite(lines)
 	
 
@@ -71,12 +73,14 @@ def register():
 	usern = input('Username: ')
 	if usern in cache_info:
 		print("\nNão é possível criar conta. O username já existe.")
-		overwrite(lines)
 	else:
-		passwd = input('Password: ')
-		buffer = f"{usern},{passwd},1,0,0,0,[]\n"
-		overwrite(lines, buffer)
-		print("\nConta criada com sucesso.")
+		if ',' in usern:
+			print("\nO username não pode conter o carater \',\'.")
+		else:
+			passwd = input('Password: ')
+			buffer = f"{usern},{passwd},1,0,0,0,[]\n"
+			overwrite(lines, buffer)
+			print("\nConta criada com sucesso.")
 	
 			
 
@@ -98,6 +102,18 @@ def login():
 				print("\nLog-in efetuado com sucesso.")
 
 	
+def close():
+	cache_info = take_info_into_dic()
+	usern = input('Username: ')
+	if usern not in cache_info:
+		print("\nO username não existe.")
+	else:
+		if usern not in logged_in:
+				print("\nO username não se encontra online.")
+		else:
+			remove_from_csv(usern)
+			print("\nConta removida com sucesso.")
+
 
 def start_game():
 	cache_info = take_info_into_dic()
@@ -119,18 +135,59 @@ def start_game():
 
 					
 
-def close():
+def get_username_input():
+	user = input("Nome do jogador: ")
 	cache_info = take_info_into_dic()
-	usern = input('Username: ')
-	if usern not in cache_info:
-		print("\nO username não existe.")
+	if user not in cache_info:
+		print("\nO jogador não existe.")
+		return -1
 	else:
-		if usern not in logged_in:
-				print("\nO username não se encontra online.")
+		if user not in logged_in:
+			print("\nO jogador não está online.")
+			return -1
 		else:
-			remove_from_csv(usern)
+			return user
+       
 
 
+def get_level(Username):	
+		with open("data/cache.csv", "r") as f:
+			info = csv.reader(f, delimiter=",")
+			count = 0
+			for row in info:
+				if count and row[0] == Username:
+					res = int(row[2])
+					break
+				count+=1
+			f.close()
+		return res
 
+			
+				
+def get_stats(Username):
+	with open("data/cache.csv", "r") as f:
+			info = csv.reader(f, delimiter=",")
+			count = 0
+			for row in info:
+				if count and row[0] == Username:
+					res = (int(row[3]), int(row[4]), int(row[5]))
+					break
+				count+=1
+			f.close()
+	return res
+
+	
+
+def get_mh(Username):
+	with open("data/cache.csv", "r") as f:
+			info = csv.reader(f, delimiter=",")
+			count = 0
+			for row in info:
+				if count and row[0] == Username:
+					res = row[6]
+					break
+				count+=1
+			f.close()
+	return res
 
 
