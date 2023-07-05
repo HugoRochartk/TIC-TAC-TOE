@@ -18,12 +18,13 @@ def menu_login():
 		print('\n\n')
 		print("1 - Registar uma conta")
 		print("2 - Login")
-		print("3 - Fechar conta")
-		print("4 - Começar um jogo")
-		print("5 - Ver nível de um jogador")
-		print("6 - Ver estatísticas de um jogador")
-		print("7 - Ver histórico de partidas de um jogador")
-		print("8 - Sair")
+		print("3 - Logout")
+		print("4 - Fechar conta")
+		print("5 - Começar um jogo")
+		print("6 - Ver nível de um jogador")
+		print("7 - Ver estatísticas de um jogador")
+		print("8 - Ver histórico de partidas de um jogador")
+		print("9 - Sair")
 		print('\n\n')
 
 		opt = input('Opção: ')
@@ -36,23 +37,26 @@ def menu_login():
 			act.login()
 		elif opt == "3":
 			separate()
-			act.close()
+			act.logout()
 		elif opt == "4":
 			separate()
-			act.start_game()
+			act.close()
 		elif opt == "5":
+			separate()
+			act.start_game()
+		elif opt == "6":
 			separate()
 			user = act.get_username_input()
 			if user != -1:
 				level = act.get_level(user)
 				print(f'\nO jogador {user} está no nível {level}.')
-		elif opt == "6":
+		elif opt == "7":
 			separate()
 			user = act.get_username_input()
 			if user != -1:
 				stats = act.get_stats(user)
 				print(f'\nVitórias: {stats[0]} | Empates: {stats[1]} | Derrotas: {stats[2]}')
-		elif opt == "7":
+		elif opt == "8":
 			separate()
 			user = act.get_username_input()
 			if user != -1:

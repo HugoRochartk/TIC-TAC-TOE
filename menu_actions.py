@@ -99,9 +99,22 @@ def login():
 				print("\nO utilizador já se encontra online.")
 			else:
 				logged_in.add(usern)
-				print("\nLog-in efetuado com sucesso.")
+				print("\nLogin efetuado com sucesso.")
 
-	
+
+def logout():
+	cache_info = take_info_into_dic()
+	usern = input('Username: ')
+	if usern not in cache_info:
+		print("\nNão é possível desligar a sessão. O username não existe.")
+	else:
+			if usern not in logged_in:
+				print("\nNão é possível desligar a sessão. O username não se encontra online.")
+			else:
+				logged_in.remove(usern)
+				print("\nLogout efetuado com sucesso.")
+
+
 def close():
 	cache_info = take_info_into_dic()
 	usern = input('Username: ')
