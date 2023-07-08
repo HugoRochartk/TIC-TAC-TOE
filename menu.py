@@ -61,7 +61,7 @@ def menu_login():
 			user = act.get_username_input()
 			if user != -1:
 				mh = act.get_mh(user)
-				print(f'Histórico de jogos ([Mais antigo, ..., Mais recente]): {mh}')
+				print(f'\nHistórico de jogos ([Mais antigo, ..., Mais recente]): {mh}')
 		else:
 			break
 

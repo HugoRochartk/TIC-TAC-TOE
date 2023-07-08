@@ -197,10 +197,11 @@ def get_mh(Username):
 			count = 0
 			for row in info:
 				if count and row[0] == Username:
-					res = row[6]
+					mh_str = row[6]
 					break
 				count+=1
 			f.close()
-	return res
+	return mh_str
+
 
 

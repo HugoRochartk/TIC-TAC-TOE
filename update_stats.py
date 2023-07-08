@@ -103,7 +103,6 @@ def update_mh_victory(winner, loser):
 	count = 0
 	for line in lines:
 		aux = line.split(",")  #user,pw,l,v,e,d,mh
-		print(aux)
 		if count:
 			if aux[0] == winner:
 				if len(aux[6]) == 22:
@@ -129,10 +128,151 @@ def update_mh_victory(winner, loser):
 	act.overwrite(new_lines)
 	
 
+def convert_mh_to_list(mh):
+	if mh == "[]":
+		return []
+	elif len(mh) == 3:
+		return [mh[1]]
+	else:
+		#[V;E;D;D]   [V;D]
+		aux = mh.split(";")
+		res = []
+		for s in aux:
+			if len(s) == 2:
+				if s[0] == '[':
+					res.append(s[1])
+				else:
+					res.append(s[0])
+			else:
+				res.append(s)
+		return res
+			
+
+
+def update_level_csv(winner, loser, r):
+	count = 0
+	if r == (0,-1):
+
+		new_lines = []
+		with open("data/cache.csv", "r") as f:
+			lines = f.readlines()
+			for line in lines:
+				if count:
+					aux = line.split(",")
+					if aux[0] == loser:
+						if aux[2] != "1":
+							aux[2] = str(int(aux[2]) - 1)
+							new_lines.append(create_line(aux))
+							count += 1
+						else:
+							new_lines.append(line)
+							count += 1
+					else:
+						new_lines.append(line)
+						count += 1
+				else:
+					new_lines.append(line)
+					count += 1
+			act.overwrite(new_lines)	
+			f.close()
+
+	elif r == (1, 0):
+
+		new_lines = []
+		with open("data/cache.csv", "r") as f:
+			lines = f.readlines()
+			for line in lines:
+				if count:
+					aux = line.split(",")
+					if aux[0] == winner:
+						aux[2] = str(int(aux[2]) +  1)
+						new_lines.append(create_line(aux))
+						count += 1
+					else:
+						new_lines.append(line)
+						count += 1
+				else:
+					new_lines.append(line)
+					count += 1
+			act.overwrite(new_lines)	
+			f.close()
+
+	else:
+
+		new_lines = []
+		with open("data/cache.csv", "r") as f:
+			lines = f.readlines()
+			for line in lines:
+				if count:
+					aux = line.split(",")
+					if aux[0] == winner:
+						aux[2] = str(int(aux[2]) +  1)
+						new_lines.append(create_line(aux))
+						count += 1
+					elif aux[0] == loser:
+						if aux[2] != "1":
+							aux[2] = str(int(aux[2]) -  1)
+							new_lines.append(create_line(aux))
+							count += 1
+						else:
+							new_lines.append(line)
+							count += 1
+					else:
+						new_lines.append(line)
+						count += 1
+				else:
+					new_lines.append(line)
+					count += 1
+			act.overwrite(new_lines)	
+			f.close()
+
+
+
+	
+
+
 
 def update_level(winner, loser):
-	pass
 	
+	mhw = convert_mh_to_list(act.get_mh(winner))
+	mhl = convert_mh_to_list(act.get_mh(loser))
+	r = (0,0)
+	#0 - dont change, 1- level up, -1- level down
+	if len(mhw) < 3:
+		if len(mhl) < 3:
+			r = (0, 0)
+		else:
+			if mhl[-1] == 'D' and mhl[-1] == mhl[-2] == mhl[-3]:
+				r = (0, -1)
+			else:
+				r = (0, 0)
+	else:
+		if len(mhl) < 3:
+			if mhw[-1] == 'V' and mhw[-1] == mhw[-2] == mhw[-3]:
+					r = (1, 0)
+			else:
+				r = (0, 0)
+		else:
+			if mhw[-1] == 'V' and mhw[-1] == mhw[-2] == mhw[-3]:
+				if mhl[-1] == 'D' and mhl[-1] == mhl[-2] == mhl[-3]:
+					r = (1, -1)
+				else:
+					r = (1, 0)
+			else:
+				if mhl[-1] == 'D' and mhl[-1] == mhl[-2] == mhl[-3]:
+					r = (0, -1)
+				else:
+					r = (0, 0)
+
+	if r == (0,0):
+		pass
+	else:
+		update_level_csv(winner, loser, r)
+	
+
+
 
 def update_level_draw(fst, snd):
 	pass
+
+
