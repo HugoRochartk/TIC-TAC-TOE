@@ -44,4 +44,4 @@ If last 3 games are victories or if last game is a draw and in the last 10 games
 
 Level Down:
 
-If last 3 games are losses or if last game is a draw and in the match history the player has a minimum of 5 losses
+If last 3 games are defeats or if last game is a draw and in the match history the player has a minimum of 5 defeats
