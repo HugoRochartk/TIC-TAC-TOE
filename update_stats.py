@@ -151,6 +151,8 @@ def convert_mh_to_list(mh):
 
 def update_level_csv(winner, loser, r):
 	count = 0
+	to_return = 0;
+
 	if r == (0,-1):
 
 		new_lines = []
@@ -185,7 +187,7 @@ def update_level_csv(winner, loser, r):
 				if count:
 					aux = line.split(",")
 					if aux[0] == winner:
-						aux[2] = str(int(aux[2]) +  1)
+						aux[2] = to_return = str(int(aux[2]) +  1)
 						new_lines.append(create_line(aux))
 						count += 1
 					else:
@@ -206,7 +208,7 @@ def update_level_csv(winner, loser, r):
 				if count:
 					aux = line.split(",")
 					if aux[0] == winner:
-						aux[2] = str(int(aux[2]) +  1)
+						aux[2] = to_return = str(int(aux[2]) +  1)
 						new_lines.append(create_line(aux))
 						count += 1
 					elif aux[0] == loser:
@@ -225,6 +227,7 @@ def update_level_csv(winner, loser, r):
 					count += 1
 			act.overwrite(new_lines)	
 			f.close()
+	return to_return
 
 
 
@@ -265,14 +268,291 @@ def update_level(winner, loser):
 					r = (0, 0)
 
 	if r == (0,0):
-		pass
+		return r
 	else:
-		update_level_csv(winner, loser, r)
+		aux = update_level_csv(winner, loser, r)
+		return (r, aux)
 	
 
 
 
+
+
+
+def update_level_draw_csv(fst, snd, r):
+	count = 0
+	to_return_fst = to_return_snd = 0;
+
+	if r == (0,-1):
+
+		new_lines = []
+		with open("data/cache.csv", "r") as f:
+			lines = f.readlines()
+			for line in lines:
+				if count:
+					aux = line.split(",")
+					if aux[0] == snd:
+						if aux[2] != "1":
+							aux[2] = str(int(aux[2]) - 1)
+							new_lines.append(create_line(aux))
+							count += 1
+						else:
+							new_lines.append(line)
+							count += 1
+					else:
+						new_lines.append(line)
+						count += 1
+				else:
+					new_lines.append(line)
+					count += 1
+			act.overwrite(new_lines)	
+			f.close()
+
+	elif r == (1, 0):
+
+		new_lines = []
+		with open("data/cache.csv", "r") as f:
+			lines = f.readlines()
+			for line in lines:
+				if count:
+					aux = line.split(",")
+					if aux[0] == fst:
+						aux[2] = to_return_fst = str(int(aux[2]) +  1)
+						new_lines.append(create_line(aux))
+						count += 1
+					else:
+						new_lines.append(line)
+						count += 1
+				else:
+					new_lines.append(line)
+					count += 1
+			act.overwrite(new_lines)	
+			f.close()
+
+	elif r == (1, -1):
+
+		new_lines = []
+		with open("data/cache.csv", "r") as f:
+			lines = f.readlines()
+			for line in lines:
+				if count:
+					aux = line.split(",")
+					if aux[0] == fst:
+						aux[2] = to_return_fst = str(int(aux[2]) +  1)
+						new_lines.append(create_line(aux))
+						count += 1
+					elif aux[0] == snd:
+						if aux[2] != "1":
+							aux[2] = str(int(aux[2]) -  1)
+							new_lines.append(create_line(aux))
+							count += 1
+						else:
+							new_lines.append(line)
+							count += 1
+					else:
+						new_lines.append(line)
+						count += 1
+				else:
+					new_lines.append(line)
+					count += 1
+			act.overwrite(new_lines)	
+			f.close()
+
+	elif r == (1, 1):
+
+		new_lines = []
+		with open("data/cache.csv", "r") as f:
+			lines = f.readlines()
+			for line in lines:
+				if count:
+					aux = line.split(",")
+					if aux[0] == fst:
+						aux[2] = to_return_fst = str(int(aux[2]) +  1)
+						new_lines.append(create_line(aux))
+						count += 1
+					elif aux[0] == snd:
+						if aux[2] != "1":
+							aux[2] = to_return_snd = str(int(aux[2]) +  1)
+							new_lines.append(create_line(aux))
+							count += 1
+						else:
+							new_lines.append(line)
+							count += 1
+					else:
+						new_lines.append(line)
+						count += 1
+				else:
+					new_lines.append(line)
+					count += 1
+			act.overwrite(new_lines)	
+			f.close()
+
+	elif r == (0, 1):
+
+		new_lines = []
+		with open("data/cache.csv", "r") as f:
+			lines = f.readlines()
+			for line in lines:
+				if count:
+					aux = line.split(",")
+					if aux[0] == snd:
+						if aux[2] != "1":
+							aux[2] = to_return_snd = str(int(aux[2]) + 1)
+							new_lines.append(create_line(aux))
+							count += 1
+						else:
+							new_lines.append(line)
+							count += 1
+					else:
+						new_lines.append(line)
+						count += 1
+				else:
+					new_lines.append(line)
+					count += 1
+			act.overwrite(new_lines)	
+			f.close()
+	
+
+	elif r == (-1, 0):
+
+		new_lines = []
+		with open("data/cache.csv", "r") as f:
+			lines = f.readlines()
+			for line in lines:
+				if count:
+					aux = line.split(",")
+					if aux[0] == fst:
+						if aux[2] != "1":
+							aux[2] =  str(int(aux[2]) -  1)
+							new_lines.append(create_line(aux))
+							count += 1
+						else:
+							new_lines.append(line)
+							count += 1
+					else:
+						new_lines.append(line)
+						count += 1
+				else:
+					new_lines.append(line)
+					count += 1
+			act.overwrite(new_lines)	
+			f.close()
+
+	elif r == (-1, -1):
+
+		new_lines = []
+		with open("data/cache.csv", "r") as f:
+			lines = f.readlines()
+			for line in lines:
+				if count:
+					aux = line.split(",")
+					if aux[0] == fst:
+						if aux[2] != "1":
+							aux[2] = str(int(aux[2]) -  1)
+							new_lines.append(create_line(aux))
+							count += 1
+						else:
+							new_lines.append(line)
+							count += 1
+					elif aux[0] == snd:
+						if aux[2] != "1":
+							aux[2] = str(int(aux[2]) -  1)
+							new_lines.append(create_line(aux))
+							count += 1
+						else:
+							new_lines.append(line)
+							count += 1
+					else:
+						new_lines.append(line)
+						count += 1
+				else:
+					new_lines.append(line)
+					count += 1
+			act.overwrite(new_lines)	
+			f.close()
+
+	elif r == (-1, 1):
+
+		new_lines = []
+		with open("data/cache.csv", "r") as f:
+			lines = f.readlines()
+			for line in lines:
+				if count:
+					aux = line.split(",")
+					if aux[0] == fst:
+						if aux[2] != "1":
+							aux[2] = str(int(aux[2]) -  1)
+							new_lines.append(create_line(aux))
+							count += 1
+						else:
+							new_lines.append(line)
+							count += 1
+					elif aux[0] == snd:
+						if aux[2] != "1":
+							aux[2] = to_return_snd = str(int(aux[2]) +  1)
+							new_lines.append(create_line(aux))
+							count += 1
+						else:
+							new_lines.append(line)
+							count += 1
+					else:
+						new_lines.append(line)
+						count += 1
+				else:
+					new_lines.append(line)
+					count += 1
+			act.overwrite(new_lines)	
+			f.close()
+
+	return to_return_fst, to_return_snd
+
+	
+
+
+
+
+
+
 def update_level_draw(fst, snd):
-	pass
+	mh1 = convert_mh_to_list(act.get_mh(fst))
+	mh2 = convert_mh_to_list(act.get_mh(snd))
+	r = (0,0)
+
+	if 'D' not in mh1 and len(mh1) == 10:
+		if 'D' not in mh2 and len(mh1) == 10:
+			r = (1,1)
+		else:
+			if mh2.count('D') >= 5:
+				r = (1, -1)
+			else:
+				r = (1, 0)
+	else:
+		if mh1.count('D') >= 5:
+			if 'D' not in mh2 and len(mh1) == 10:
+				r = (-1, 1)
+			else:
+				if mh2.count('D') >= 5:
+					r = (-1, -1)
+				else:
+					r = (-1, 0)
+		else:
+			if 'D' not in mh2 and len(mh1) == 10:
+				r = (0, 1)
+			else:
+				if mh2.count('D') >= 5:
+					r = (0, -1)
+				else:
+					r = (0, 0)
+
+
+	if r == (0,0):
+		return r
+	else:
+		aux1, aux2 = update_level_draw_csv(fst, snd, r)
+		return (r, aux1, aux2)
+
+
+
+
 
 

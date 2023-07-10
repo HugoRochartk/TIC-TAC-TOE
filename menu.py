@@ -2,7 +2,7 @@ import menu_actions as act
 
 
 def separate():
-	print('-------------------------------------')
+	print('-----------------------------------------------------------')
 
 
 def clear_input(input):

@@ -1,3 +1,6 @@
 username,password,level,V,E,D,MatchHistory
-zedi,zedi,1,0,0,5,[D;D;D;D;D]
-hugo,hugo,4,5,0,0,[V;V;V;V;V]
+zedi,zedi,1,0,2,5,[D;D;D;D;D;E;E]
+hugo,hugo,4,5,2,0,[V;V;V;V;V;E;E]
+teste1,teste1,10,7,6,0,[V;V;V;V;V;E;E;E;E;E]
+teste2,teste2,2,1,6,6,[D;E;E;D;D;D;E;E;E;E]
+
