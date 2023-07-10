@@ -7,11 +7,15 @@ Just run main.py
 # Stats Counter
 
 V: Victories
+
 E: Ties
+
 D: Defeats
 
 Example:
+
 V E D
+
 7 2 3
 
 The player has 7 victories, 2 ties and 3 defeats.
