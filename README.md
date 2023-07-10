@@ -4,7 +4,7 @@
 Just run main.py
 
 
-#Stats Counter
+# Stats Counter
 
 V: Victories
 E: Ties
@@ -17,7 +17,7 @@ V E D
 The player has 7 victories, 2 ties and 3 defeats.
 
 
-#Match History
+# Match History
 V: Victory
 E: Tie
 D: Defeat
@@ -28,7 +28,7 @@ Example:
 the oldest ... the most recently
 
 
-#Levels Management
+# Levels Management
 
 Level Up:
 If last 3 games are victories or if last game is a draw and in the last 10 games the player has no defeats
